@@ -9,6 +9,8 @@ const RoomPeer = new Peer(null, {
 const videoChat = document.createElement("video");
 videoChat.muted = true;
 
+const peers = {};
+
 let constraints = {
   video: true,
   audio: true,
@@ -33,6 +35,10 @@ navigator.mediaDevices
   })
   .catch((err) => console.log(err));
 
+socket.on("user-left", (user) => {
+  if (peers[user]) peers[user].close();
+});
+
 RoomPeer.on("open", (id) => {
   socket.emit("join-video-chat", ROOM_ID, id);
 });
@@ -46,6 +52,8 @@ function connectNewUser(user, stream) {
   call.on("close", () => {
     video.remove();
   });
+
+  peers[user] = call;
 }
 
 function addVideoStream(video, stream) {
