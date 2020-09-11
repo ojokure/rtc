@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/ojokure/rtc/issues"
   },
-  "homepage": "https://github.com/ojokure/rtc#readme"
+  "homepage": "https://github.com/ojokure/rtc#readme",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "uuid": "^8.3.0"
+  }
 }
